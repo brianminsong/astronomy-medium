@@ -112,7 +112,7 @@ export const Graph = ({dataSets, graphRadio}) => {
                 plugins: {
                     title: {
                         display: false,
-                        text: "vibe check"
+                        text: "Graph"
                     },
                     legend: {
                         display: true
