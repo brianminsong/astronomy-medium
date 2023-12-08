@@ -105,7 +105,7 @@ export const Main = ({apodImage}) => {
     //     <img src={apodImage} style={{maxHeight:'500px', maxWidth:'500px', height:'auto', width:'auto'}}></img>
     //   )}
     // </div>
-    <div style={{marginLeft: '50px', marginRight: '50px'}}>
+    <div style={{marginLeft: '25px', marginRight: '25px'}}>
       <MUIDataTable
         title={"SPARC DATASET"}
         data={data}
