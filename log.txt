@@ -80,3 +80,11 @@ EVerything with respect to radius for http://astroweb.case.edu/SPARC/MassModels_
 
 pick the galaxies you want, and then for each one chosen there is additonal data to graph
 
+
+
+
+12/8
+if there is only one galaxy chosen, then checkbox
+
+if there are multiple galaxies chosen, then radios
+

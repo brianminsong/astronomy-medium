@@ -56,8 +56,24 @@ export const Main = ({apodImage}) => {
 
   const [radio, setRadio] = useState('');
   const onChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setRadio(event.target.value);
+    setCheck([]);
+  }
+
+  const [check, setCheck] = useState([]);
+  const onChangeCheck = (event) => {
+    // console.log(event.target.checked);
+    const c1 = check;
+    if(event.target.checked){
+      c1.push(event.target.value);
+      setCheck(c1);
+    }
+    else{
+      c1.splice(c1.indexOf(event.target.value), 1);
+      setCheck(c1);
+    }
+    console.log(check);
   }
 
   const style = {
@@ -89,17 +105,18 @@ export const Main = ({apodImage}) => {
     //     <img src={apodImage} style={{maxHeight:'500px', maxWidth:'500px', height:'auto', width:'auto'}}></img>
     //   )}
     // </div>
-    <div>
+    <div style={{marginLeft: '50px', marginRight: '50px'}}>
       <MUIDataTable
-        title={"Sparc Data"}
+        title={"SPARC DATASET"}
         data={data}
         columns={columns}
         options={options}
+        style={{marginBottom: '10px'}}
       />
 
 
 
-      <Button onClick={handleOpen}>Add filters</Button>
+      {/* <Button onClick={handleOpen}>Add filters</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -124,9 +141,9 @@ export const Main = ({apodImage}) => {
             ))}
           </Select>
         </Box>
-      </Modal>
+      </Modal> */}
 
-
+      {(galaxyData.length > 1) && (
       <Box>
         <h2>Graph with respect to radius</h2>
         <input type="radio" id="radio1" name="graph" onChange={onChange} value="1" />
@@ -144,8 +161,29 @@ export const Main = ({apodImage}) => {
         <input type="radio" id="radio9" name="graph" onChange={onChange} value="9" />
         <label for="radio9">Bulge surface brightness</label>
       </Box>
+      )}
 
+      {/* {(galaxyData.length === 1) && (
+        <Box>
+        <h2>Graph with respect to radius</h2>
+        <input type="checkbox" id="checkbox1" name="graph" onChange={onChangeCheck} value="1" />
+        <label for="checkbox1">Assumed distance</label>
+        <input type="checkbox" id="checkbox3" name="graph" onChange={onChangeCheck} value="3" />
+        <label for="checkbox3">Observed circular velocity</label>
+        <input type="checkbox" id="checkbox5" name="graph" onChange={onChangeCheck} value="5" />
+        <label for="checkbox5">Gas velocity contribution</label>
+        <input type="checkbox" id="checkbox6" name="graph" onChange={onChangeCheck} value="6" />
+        <label for="checkbox6">Disk velocity contribution</label>
+        <input type="checkbox" id="checkbox7" name="graph" onChange={onChangeCheck} value="7" />
+        <label for="checkbox7">Bulge velocity contribution</label>
+        <input type="checkbox" id="checkbox8" name="graph" onChange={onChangeCheck} value="8" />
+        <label for="checkbox8">Disk surface brightness</label>
+        <input type="checkbox" id="checkbox9" name="graph" onChange={onChangeCheck} value="9" />
+        <label for="checkbox9">Bulge surface brightness</label>
+      </Box>
+      )} */}
       <Graph dataSets={galaxyData} graphRadio={radio}/>
+      {/* <Graph dataSets={galaxyData} graphRadio={radio} graphCheck={check}/> */}
 
     </div>
   )

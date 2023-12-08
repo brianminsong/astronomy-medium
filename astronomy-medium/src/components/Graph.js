@@ -19,7 +19,11 @@ export const Graph = ({dataSets, graphRadio}) => {
     var dataList = [];
     var galLabels = [];
     var data = [];
-    if((graphRadio > 0) && (dataSets.length > 0)){
+
+    if((graphRadio > 0) && (dataSets.length > 1)){
+        dataList = [];
+        galLabels = [];
+        data = [];
         dataSets.forEach(set => {
             //for each galaxy (here)there are multiple subsets
             const galData = [];
@@ -49,8 +53,46 @@ export const Graph = ({dataSets, graphRadio}) => {
         }))
     }
     console.log(data);
-
     }
+    //one galaxt is at dataSets[0]
+    // console.log("parse" + graphCheck);
+
+    // if((graphCheck.length > 0) && (dataSets.length === 1)){
+    //     dataList = [];
+    //     galLabels = [];
+    //     data = [];
+    //     graphCheck.forEach(check => {
+    //         //for each checked box, that's the data set
+    //         const set = dataSets[0];
+    //         const galData = [];
+    //         set.forEach(subSet => {
+    //             //getting the smaller params
+    //             const galaxy = {x: subSet[2], y: subSet[check]};
+    //             galData.push(galaxy);
+    //         })
+    //         //for each check, make a set of each galaxy subset
+    //         dataList.push(galData);
+
+    //         galLabels.push(labels[check]);
+    //     })
+
+
+    //     data = {
+    //         labels: galLabels,
+    //         datasets: dataList.map((graphData, index) => ({
+    //             label: galLabels[index],
+    //             data: graphData,
+    //             borderColor: colors[Math.random() * colors.length],
+    //             backgroundColor: colors[Math.random() * colors.length],
+    //             borderWidth: 2,
+    //             fill: false,
+    //             tension: 0.4
+    //         }))
+    //     }
+    //     // console.log("parse" + dataList);
+    //     // console.log("parse" + galLabels);
+    //     // console.log("parse" + data);
+    // }
     
     
 
@@ -59,7 +101,7 @@ export const Graph = ({dataSets, graphRadio}) => {
   return (
     <div style={{width: "100%", height : "500px"}}>
         
-        {((graphRadio > 0) && (dataSets.length > 0)) && (
+        {(((graphRadio > 0)) && (dataSets.length > 0)) && (
         <Line
             style={{margin: '2em'}}
             id='chart'
@@ -109,6 +151,57 @@ export const Graph = ({dataSets, graphRadio}) => {
         </Line>
 
         )}
+
+    {/* {(((graphCheck.length > 0)) && (dataSets.length > 0)) && (
+        <Line
+            style={{margin: '2em'}}
+            id='chart'
+            height={'30px'}
+            data={data}
+            options={{
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: false,
+                        text: "vibe check"
+                    },
+                    legend: {
+                        display: true
+                    }
+                },
+                scales: {
+                    y: {
+                        gridLines: {
+                            color: "black"
+                          },
+                        title: {
+                            display: true,
+                            text: 'y',
+                        },
+                        ticks: {
+                            stepSize: 1,
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Radius in KPC',
+                        },
+                        ticks: {
+                            display: true
+                        },
+                        type: 'linear',
+                        gridLines: {
+                            color: "black"
+                          },
+                    }
+                    
+                },
+            }}>
+
+        </Line>
+
+        )} */}
     </div>
   )
 }
