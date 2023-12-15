@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { Grid, TableCell, TableContainer, Modal, Typography, Box, Button } from '@mui/material';
+import { Grid, TableCell, TableContainer, Modal, Typography, Box, Button, typographyClasses } from '@mui/material';
 import { Select, MenuItem } from '@mui/material';
 import MUIDataTable from "mui-datatables";
 import data from '../data/sparc'
@@ -45,6 +45,12 @@ export const Main = ({apodImage}) => {
       setGalaxyData(selectedGalSets);
     })
     // console.log(selectedGalSets);
+    if(galaxyData.length > 1){
+      setCheck([]);
+    }
+    if(galaxyData.length == 1){
+      setRadio(0);
+    }
   } 
 
   const options = {
@@ -58,22 +64,32 @@ export const Main = ({apodImage}) => {
   const onChange = (event) => {
     // console.log(event.target.value);
     setRadio(event.target.value);
-    setCheck([]);
   }
 
   const [check, setCheck] = useState([]);
+  // const onChangeCheck = (event) => {
+  //   // console.log(event.target.checked);
+  //   var c1 = check;
+  //   if(event.target.checked){
+  //     c1.push(event.target.value);
+  //   }
+  //   else{
+  //     c1.splice(c1.indexOf(event.target.value), 1);
+  //   }
+  //   setCheck(c1);
+  //   console.log(check);
+  // }
+
   const onChangeCheck = (event) => {
-    // console.log(event.target.checked);
-    const c1 = check;
+    var c1 = Object.values(check);
     if(event.target.checked){
       c1.push(event.target.value);
       setCheck(c1);
     }
     else{
-      c1.splice(c1.indexOf(event.target.value), 1);
+      c1.splice(check.indexOf(event.target.value), 1)
       setCheck(c1);
     }
-    console.log(check);
   }
 
   const style = {
@@ -91,13 +107,14 @@ export const Main = ({apodImage}) => {
     pb: 3,
   };
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const [open, setOpen] = React.useState(false);
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+
 
   return (
     // <div style={{margin:'20px'}}>
@@ -111,10 +128,10 @@ export const Main = ({apodImage}) => {
         data={data}
         columns={columns}
         options={options}
-        style={{marginBottom: '10px'}}
+        style={{marginBottom: '5px', paddingBottom: '1rem'}}
       />
 
-
+      <div style={{height:'3em'}}/>
 
       {/* <Button onClick={handleOpen}>Add filters</Button>
       <Modal
@@ -145,7 +162,7 @@ export const Main = ({apodImage}) => {
 
       {(galaxyData.length > 1) && (
       <Box>
-        <h2>Graph with respect to radius</h2>
+        <h2>Compare parameters from multiple galaxies</h2>
         <input type="radio" id="radio1" name="graph" onChange={onChange} value="1" />
         <label for="radio1">Assumed distance</label>
         <input type="radio" id="radio3" name="graph" onChange={onChange} value="3" />
@@ -163,9 +180,9 @@ export const Main = ({apodImage}) => {
       </Box>
       )}
 
-      {/* {(galaxyData.length === 1) && (
+      {(galaxyData.length == 1) && (
         <Box>
-        <h2>Graph with respect to radius</h2>
+          <h2>Graph individual galaxy data parameters</h2>
         <input type="checkbox" id="checkbox1" name="graph" onChange={onChangeCheck} value="1" />
         <label for="checkbox1">Assumed distance</label>
         <input type="checkbox" id="checkbox3" name="graph" onChange={onChangeCheck} value="3" />
@@ -181,9 +198,13 @@ export const Main = ({apodImage}) => {
         <input type="checkbox" id="checkbox9" name="graph" onChange={onChangeCheck} value="9" />
         <label for="checkbox9">Bulge surface brightness</label>
       </Box>
-      )} */}
-      <Graph dataSets={galaxyData} graphRadio={radio}/>
+      )}
       {/* <Graph dataSets={galaxyData} graphRadio={radio} graphCheck={check}/> */}
+      {/* {(radio > 0) &&
+        <Graph dataSets={galaxyData} graphRadio={radio}/>
+      } */}
+      <Graph dataSets={galaxyData} graphCheck={check} graphRadio={radio} />
+      
 
     </div>
   )
