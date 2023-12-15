@@ -124,7 +124,7 @@ export const Graph = ({dataSets, graphRadio, graphCheck}) => {
         
         {(((graphRadio > 0)) && (dataSets.length > 1)) && (
         <Line
-            style={{margin: '2em'}}
+            style={{margin: '2em', marginBottom: '0'}}
             id='chart'
             height={'30px'}
             ref={canvasRef}
@@ -151,7 +151,8 @@ export const Graph = ({dataSets, graphRadio, graphCheck}) => {
                         },
                         ticks: {
                             stepSize: 1,
-                        }
+                        },
+                        beginAtZero: true
                     },
                     x: {
                         title: {
@@ -203,7 +204,8 @@ export const Graph = ({dataSets, graphRadio, graphCheck}) => {
                         },
                         ticks: {
                             stepSize: 1,
-                        }
+                        },
+                        beginAtZero: true
                     },
                     x: {
                         title: {
@@ -225,7 +227,7 @@ export const Graph = ({dataSets, graphRadio, graphCheck}) => {
         )}
     </div>
     {(((graphRadio > 0) || (graphCheck.length > 0)) && (dataSets.length > 0)) && (
-        <a id='dwn' href='download_image' onClick={saveImage}><b>Download Graph</b></a>
+        <a id='dwn' href='download_image' onClick={saveImage} style={{paddingBottom: '25px'}}><b>Download Graph</b></a>
     )}
     </>
   )
